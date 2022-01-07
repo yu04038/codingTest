@@ -17,14 +17,3 @@ for _ in range(T):
             break
         A -= 1
         B += 1
-        
-# for k in range(number):
-#     n = int(input())
-#     new_newList = []
-
-#     newList = [l for l in sosu if l < n]
-#     for m in newList:
-#         if n - m in newList:
-#             if m <= n-m:
-#                 new_newList.append([m, n-m])
-#     print("{} {}".format(new_newList[-1][0], new_newList[-1][1]))
