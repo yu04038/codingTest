@@ -12,7 +12,6 @@ fun main() {
     var k = StringTokenizer(br.readLine()).nextToken().toInt()
     val arr = mutableListOf<Int>()
     val stack = mutableListOf<Int>()
-    val temp = mutableListOf<Int>()
     var a = 1
 
     for (i in 0 until k) {
