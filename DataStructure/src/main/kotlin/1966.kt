@@ -2,28 +2,64 @@ import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
+import java.util.LinkedList
 import java.util.StringTokenizer
 
 fun main() {
 
     val br = BufferedReader(InputStreamReader(System.`in`))
-    val bw = BufferedWriter(OutputStreamWriter(System.out))
-    val numberN = StringTokenizer(br.readLine()).nextToken().toInt()
-    val arrN = StringTokenizer(br.readLine())
-    val arr = mutableSetOf<String>()
-    for (i in 0 until numberN) {
-        arr.add(arrN.nextToken())
-    }
+    val number = br.readLine().toInt()
 
-    val numberM = StringTokenizer(br.readLine()).nextToken().toInt()
-    val arrM = StringTokenizer(br.readLine())
-    for (j in 0 until numberM) {
-        if (arr.contains(arrM.nextToken())) {
-            bw.write("1\n")
+    for (i in 0 until number) {
+        var document = StringTokenizer(br.readLine())
+        var documentNumber = document.nextToken().toInt()
+        var documentLocation = document.nextToken().toInt()
+        var queue = LinkedList<Int>()
+
+        var importance = StringTokenizer(br.readLine())
+
+        for (j in 0 until documentNumber) {
+            queue.add(importance.nextToken().toInt())
+        }
+
+        calculate(queue, documentLocation)
+    }
+}
+
+fun calculate(queue: LinkedList<Int>, documentLocation: Int) {
+    var index = documentLocation
+    var order = 0
+
+    while (queue.size != 0) {
+        var count = 0
+        for (i in queue) {
+            if (i > queue.first) {
+                count += 1
+            }
+        }
+        if (queue.size > 1) {
+            if (count != 0) {
+                queue.addLast(queue.first)
+                queue.removeFirst()
+                if (index == 0) {
+                    index = queue.size - 1
+                } else {
+                    index -= 1
+                }
+            } else {
+                queue.removeFirst()
+                order += 1
+                if (index == 0) {
+                    println(order)
+                    break
+                } else {
+                    index -= 1
+                }
+            }
         } else {
-            bw.write("0\n")
+            order += 1
+            println(order)
+            queue.removeFirst()
         }
     }
-    bw.flush()
-    bw.close()
 }
