@@ -7,25 +7,53 @@ import java.util.*
 fun main() {
 
     var br = BufferedReader(InputStreamReader(System.`in`))
-    var bw = BufferedWriter(OutputStreamWriter(System.out))
 
     var k = StringTokenizer(br.readLine()).nextToken().toInt()
-    val arr = mutableListOf<Int>()
-    val stack = mutableListOf<Int>()
-    var a = 1
+    val arr = LinkedList<Int>()
+    val stack1 = LinkedList<Int>()
+    val stack2 = LinkedList<Int>()
+    var count = 2
+    var answer = mutableListOf<String>()
 
     for (i in 0 until k) {
-        var number = StringTokenizer(br.readLine()).nextToken().toInt()
+        val number = StringTokenizer(br.readLine()).nextToken().toInt()
         arr.add(number)
-        stack.add(i + 1)
     }
+    stack1.add(1)
+    answer += "+"
 
-    for (i in arr) {
-        if (a <= i) {
-            println("+")
-            stack.add(a)
-            a += 1
+    while (stack2.size != k) {
+        if (stack1.size >= 1) {
+            if (stack1.last == arr.first) {
+                arr.removeFirst()
+                stack2.add(stack1.removeLast())
+                answer += "-"
+            } else {
+                if (count > k) {
+                    answer += "NO"
+                    break
+                } else {
+                    stack1.add(count)
+                    answer += "+"
+                    count += 1
+                }
+            }
+        } else {
+            if (count > k) {
+                answer += "NO"
+                break
+            } else {
+                stack1.add(count)
+                answer += "+"
+                count += 1
+            }
         }
     }
-
+    if (answer.contains("NO")) {
+        println("NO")
+    } else {
+        for (i in answer) {
+            println(i)
+        }
+    }
 }
