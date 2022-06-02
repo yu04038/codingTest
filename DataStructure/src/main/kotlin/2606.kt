@@ -26,7 +26,7 @@ fun main(){
     bfs(1)
     println(answer)
 }
-fun bfs(v : Int){
+fun bfs(v:Int){
     val queue = LinkedList<Int>()
 
     queue.add(v)
